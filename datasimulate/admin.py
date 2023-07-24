@@ -40,10 +40,10 @@ class APDeviceAdmin(admin.ModelAdmin):
     def create_dummy_data(self, request):
         if request.method == 'POST':
             num_entries = int(request.POST.get('serial_number', 0))
-            for _ in range(num_entries):
-                connect_cloud(generate_serial_number(9), self, request)
-            # with ThreadPoolExecutor(max_workers=20, thread_name_prefix="create_dummy_data") as exe:
-            #     _ = [exe.submit(connect_cloud, generate_serial_number(9), self, request) for _ in range(num_entries)]
+            # for _ in range(num_entries):
+            #     connect_cloud(generate_serial_number(9), self, request)
+            with ThreadPoolExecutor(max_workers=20, thread_name_prefix="create_dummy_data") as exe:
+                _ = [exe.submit(connect_cloud, generate_serial_number(9), self, request) for _ in range(num_entries)]
             self.message_user(request, f"Created {num_entries} dummy data entries.",messages.SUCCESS)
             return redirect(reverse('admin:datasimulate_apdevice_changelist'))
 
