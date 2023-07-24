@@ -150,4 +150,5 @@ CHANNEL_LAYERS = {
 
 CRONJOBS = [
     ('30 0 * * *', 'datatransform.views.delete_tmp_data'),
+    ('* * * * *', 'datatransform.views.publish_data'),
 ]
