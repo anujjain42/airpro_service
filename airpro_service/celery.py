@@ -15,7 +15,7 @@ def debug_task(self):
 
 celery_app.conf.beat_schedule = {
     'add-every-1-minute': {
-        'task': 'read_user_system_data',
+        'task': 'publish_data',
         'schedule': 60.0,
     },
     
